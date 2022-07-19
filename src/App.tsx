@@ -7,7 +7,7 @@ function App() {
   console.log(stop);
 
   useEffect(() => {
-    let myInterval: any = setInterval(() => {
+    let myInterval = setInterval(() => {
       if (seconds > 0 && !stop) {
         setSeconds(seconds - 1);
       }
@@ -25,32 +25,35 @@ function App() {
   });
 
   return (
-    <>
-      <input
-        onChange={(e) => {
-          setSeconds(e.target.value);
-        }}
-        type="text"
-      />
-      <h1>countdown {seconds}</h1>
-      {!stop ? (
-        <button
-          onClick={() => {
-            setStop(true);
+    <div className="App">
+      <div className="colntainer">
+        <h1>Simple CountDown</h1>
+        <input
+          onChange={(e) => {
+            setSeconds(e.target.value);
           }}
-        >
-          Stop
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            setStop(false);
-          }}
-        >
-          resume
-        </button>
-      )}
-    </>
+          type="text"
+        />
+        {!stop ? (
+          <button
+            onClick={() => {
+              setStop(true);
+            }}
+          >
+            Stop
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setStop(false);
+            }}
+          >
+            resume
+          </button>
+        )}
+        <h1>countdown {seconds}</h1>
+      </div>
+    </div>
   );
 }
 
