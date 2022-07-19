@@ -5,20 +5,20 @@ function App() {
   var [seconds, setSeconds] = useState<any>(0);
   var [stop, setStop] = useState<boolean>(false);
   console.log(stop);
-
+  const interval = (myInterval: any) => {
+    if (seconds > 0 && !stop) {
+      setSeconds(seconds - 1);
+    }
+    if (seconds === 0) {
+      clearInterval(myInterval);
+    }
+    if (stop) {
+      console.log("stoped");
+      clearInterval(myInterval);
+    }
+  };
   useEffect(() => {
-    let myInterval = setInterval(() => {
-      if (seconds > 0 && !stop) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds === 0) {
-        clearInterval(myInterval);
-      }
-      if (stop) {
-        console.log("stoped");
-        clearInterval(myInterval);
-      }
-    }, 1000);
+    let myInterval = setInterval(interval, 1000);
     return () => {
       clearInterval(myInterval);
     };
@@ -51,7 +51,9 @@ function App() {
             resume
           </button>
         )}
-        <h1>countdown {seconds}</h1>
+        <h1>
+          countdown <span>{seconds > 0 ? seconds : null}</span>
+        </h1>
       </div>
     </div>
   );
